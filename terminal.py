@@ -9,20 +9,21 @@ CHAR_CORES = {
 CORES_NORMAIS = Back.BLACK+Fore.WHITE
 SEPARADOR = CORES_NORMAIS + '|  |'
 
+class CLI:
+    def __init__(self):
+        init(autoreset=True)
 
-init(autoreset=True)
-
-def print_linhas(tubos: list, tamanho: int = 5):
-    for i in range(tamanho):
-        linha = []
-        for tubo in tubos:
-            cor = tubo.cores[i]
-            linha.append(CHAR_CORES[cor])
-        print(' |{}{}|'.format(
-            SEPARADOR.join(linha),
-            CORES_NORMAIS,
+    def menu(self, tubos: list, perguntar: bool = True):
+        for linha in map(list, zip(*[t.cores for t in tubos])):
+            print(' |{}{}|'.format(
+                SEPARADOR.join(CHAR_CORES[c] for c in linha),
+                CORES_NORMAIS,
+            ))
+        tamanho = len(tubos)
+        numeros = ' {}   ' * tamanho
+        print(' {}{}\n {}'.format(
+            Style.RESET_ALL, '+-+  ' * tamanho,
+            numeros.format(*range(1, tamanho+1))
         ))
-    rodape = '+-+  ' * tamanho
-    numeros = ' {}   ' * tamanho
-    print(' ' + Style.RESET_ALL + rodape)
-    print(' ' + numeros.format(*range(1, tamanho+1)))
+        if perguntar:
+            return input('Números dos tubos origem-destino: ')

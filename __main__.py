@@ -1,4 +1,5 @@
 from jogo import Jogo
+from terminal import CLI
 
 print('''
     ::::::  R.G.B. ::::::
@@ -12,9 +13,13 @@ print('''
 
     Bom jogo!
 ''')
-jogo = Jogo(5)  # 5 tubos de 5 cores cada
+jogo = Jogo(
+    interface=CLI(),
+    tamanho=5  # 5 tubos de 5 cores cada
+)
 while jogo.continuar():
     jogo.atualiza()
 print('=' * 50)
-print('PARABÉNS'.center(50))
+print('PARABÉNS!!'.center(50))
 print('=' * 50)
+jogo.finaliza()
