@@ -1,12 +1,13 @@
-from colorama import init, Fore, Style
+from colorama import init, Fore, Back, Style
 
 CHAR_CORES = {
-    'R': Fore.RED+'*',
-    'G': Fore.GREEN+'*',
-    'B': Fore.BLUE+'*',
+    'R': Back.RED+Fore.LIGHTMAGENTA_EX+'º',
+    'G': Back.GREEN+Fore.LIGHTGREEN_EX+'º',
+    'B': Back.BLUE+Fore.CYAN+'º',
     ' ': ' '
 }
-SEPARADOR = Fore.WHITE + '|  |'
+CORES_NORMAIS = Back.BLACK+Fore.WHITE
+SEPARADOR = CORES_NORMAIS + '|  |'
 
 
 init(autoreset=True)
@@ -19,7 +20,7 @@ def print_linhas(tubos: list, tamanho: int = 5):
             linha.append(CHAR_CORES[cor])
         print(' |{}{}|'.format(
             SEPARADOR.join(linha),
-            Fore.WHITE
+            CORES_NORMAIS,
         ))
     rodape = '+-+  ' * tamanho
     numeros = ' {}   ' * tamanho
