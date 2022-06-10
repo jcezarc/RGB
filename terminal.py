@@ -6,6 +6,7 @@ CHAR_CORES = {
     'B': Fore.BLUE+'*',
     ' ': ' '
 }
+SEPARADOR = Fore.WHITE + '|  |'
 
 
 init(autoreset=True)
@@ -16,8 +17,9 @@ def print_linhas(tubos: list, tamanho: int = 5):
         for tubo in tubos:
             cor = tubo.cores[i]
             linha.append(CHAR_CORES[cor])
-        print(' |{}|'.format(
-            '|  |'.join(linha)
+        print(' |{}{}|'.format(
+            SEPARADOR.join(linha),
+            Fore.WHITE
         ))
     rodape = '+-+  ' * tamanho
     numeros = ' {}   ' * tamanho

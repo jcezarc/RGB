@@ -2,18 +2,18 @@ from random import choice
 
 
 class Tubo:
-    def __init__(self, tamanho: int):
-        self.cores = [' ']
+    def __init__(self, tamanho: int, vazios: int=1):
+        self.cores = [' ']*vazios
         while len(self.cores) < tamanho:
             self.cores.append(
                 choice(['R', 'G', 'B'])
             )
 
+    def todas_cores(self) -> list:
+        return [c for c in self.cores if c != ' ']
+
     def primeira_cor(self) -> str:
-        return next(
-            (cor for cor in self.cores if cor != ' ')
-            , ''
-        )
+        return next(iter(self.todas_cores()), '')
 
     def despeja(self, tubo):
         p1, p2 = [t.primeira_cor() for t in (self, tubo)]
@@ -28,4 +28,5 @@ class Tubo:
         return True
 
     def completo(self) -> bool:
-        return ''.join(self.cores) == self.cores[0] * len(self.cores)
+        primeira = self.primeira_cor()
+        return all(c == primeira for c in self.todas_cores())
