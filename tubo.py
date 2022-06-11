@@ -16,16 +16,16 @@ class Tubo:
         return next(iter(self.todas_cores()), '')
 
     def despeja(self, tubo):
-        p1, p2 = [t.primeira_cor() for t in (self, tubo)]
-        if p2 != '' and p2 != p1:
-            return False
-        if ' ' not in tubo.cores:
-            return False
-        i = ''.join(tubo.cores).rindex(' ')
-        tubo.cores[i] = p1
-        i = self.cores.index(p1)
-        self.cores[i] = ' '
-        return True
+        c1, c2 = [t.primeira_cor() for t in (self, tubo)]
+        if c2 != '' and c2 != c1:
+            return 0
+        i = self.cores.index(c1)
+        while self.cores[i] == c1 and ' ' in tubo.cores:
+            j = ''.join(tubo.cores).rindex(' ')
+            tubo.cores[j] = c1            
+            self.cores[i] = ' '
+            i += 1
+        return i
 
     def completo(self) -> bool:
         primeira = self.primeira_cor()
